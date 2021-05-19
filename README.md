@@ -6,7 +6,7 @@
 
 * user by default for each node `vagrant` pwd `vagrant`
 
-* we are using ansible 2.7.6 and kubespray-realease-2.9
+* we are using ansible 2.9.20 and kubespray v2.15.1
 
 <br>
 
@@ -42,10 +42,10 @@
 
 <br>
 
-* clone du dépôt
+* clone du dépôt (tag v2.15.1)
 
 ```
-git clone --branch=release-2.9 https://github.com/kubernetes-sigs/kubespray.git
+git clone -b v2.15.1 https://github.com/kubernetes-sigs/kubespray.git
 
 cd /home/vagrant/kubespray
 ```
@@ -61,10 +61,6 @@ sudo apt install sshpass
 <br>
 
 * installation des requirements
-
-* change ansible version to be installed to ansible==2.7.6
-
-`vim requirements.txt` then change ansible>=2.7.6 to ansible==2.7.6
 
 ```
 pip3 install -r requirements.txt
