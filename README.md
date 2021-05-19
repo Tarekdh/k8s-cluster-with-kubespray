@@ -6,7 +6,7 @@
 
 * user by default for each node `vagrant` pwd `vagrant`
 
-* we are using ansible 2.7.6 and kubespray
+* we are using ansible 2.7.6 and kubespray-realease-2.9
 
 <br>
 
@@ -142,6 +142,41 @@ you can run these commands to solve the problem
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+* get cluster info 
+
+`kubectl cluster-info`
+
+* disable dashboard auth `kubectl edit deployment/kubernetes-dashboard --namespace=kube-system`
+
+then add 
+
+```
+- --enable-skip-login
+- --disable-settings-authorizer        
+- --auto-generate-certificates
+```
+
+```
+spec:
+      containers:
+      - name: kubernetes-dashboard
+        image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
+        ports:
+        - containerPort: 8443
+          protocol: TCP
+        args:
+          - --enable-skip-login
+          - --disable-settings-authorizer        
+          - --auto-generate-certificates
+          # Uncomment the following line to manually specify Kubernetes API server Host
+          # If not specified, Dashboard will attempt to auto discover the API server and connect
+          # to it. Uncomment only if the default does not work.
+          # - --apiserver-host=http://my-address:port
+        volumeMounts:
+        - name: kubernetes-dashboard-certs
+          mountPath: /certs
 ```
 
 #install Helm
