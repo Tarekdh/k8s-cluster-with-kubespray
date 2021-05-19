@@ -9,9 +9,9 @@ Vagrant.configure(2) do |config|
   sudo apt install software-properties-common
   sudo add-apt-repository ppa:deadsnakes/ppa
   sudo apt update
-  sudo apt install ansible
-
   sudo apt -y install vim tree net-tools telnet git python3-pip
+  #sudo apt update
+  #sudo pip3 install ansible==2.7.6
   sudo echo "autocmd filetype yaml setlocal ai ts=2 sw=2 et" > /home/vagrant/.vimrc
   sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config
   sudo systemctl restart sshd

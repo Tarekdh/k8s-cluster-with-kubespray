@@ -4,6 +4,10 @@
 
 * 1 machine deploiement, 1 master et 1 node
 
+* user by default for each node `vagrant` pwd `vagrant`
+
+* we are using ansible 2.7.6 and kubespray
+
 <br>
 
 * kubespray :
@@ -31,6 +35,9 @@
 
 * sur la machine de déploiement : deploykub
 
+* run these commands unsing root user to avoid issues `sudo su` 
+
+
 `vagrant ssh deploykub`
 
 <br>
@@ -38,7 +45,7 @@
 * clone du dépôt
 
 ```
-git clone https://github.com/kubernetes-sigs/kubespray.git
+git clone --branch=release-2.9 https://github.com/kubernetes-sigs/kubespray.git
 
 cd /home/vagrant/kubespray
 ```
@@ -54,6 +61,10 @@ sudo apt install sshpass
 <br>
 
 * installation des requirements
+
+* change ansible version to be installed to ansible==2.7.6
+
+`vim requirements.txt` then change ansible>=2.7.6 to ansible==2.7.6
 
 ```
 pip3 install -r requirements.txt
@@ -104,7 +115,11 @@ kube-node
 calico-rr
 ```
 
+* run `export ANSIBLE_INVALID_TASK_ATTRIBUTE_FAILED=False`
+
 ansible-playbook -i inventory/my-cluster/inventory.ini  --become --become-user=root -u vagrant -k -b cluster.yml
+
+* connect to the master node `node01`
 
 run `kubectl get nodes` to check that your work is done
 
