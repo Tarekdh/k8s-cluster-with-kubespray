@@ -144,36 +144,42 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 `kubectl cluster-info`
 
-* disable dashboard auth `kubectl edit deployment/kubernetes-dashboard --namespace=kube-system`
+* deploy dashboard application
 
-then add 
-
-```
-- --enable-skip-login
-- --disable-settings-authorizer        
-- --auto-generate-certificates
-```
+you can find instructions to deploy dashboard in link below
 
 ```
-spec:
-      containers:
-      - name: kubernetes-dashboard
-        image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
-        ports:
-        - containerPort: 8443
-          protocol: TCP
-        args:
-          - --enable-skip-login
-          - --disable-settings-authorizer        
-          - --auto-generate-certificates
-          # Uncomment the following line to manually specify Kubernetes API server Host
-          # If not specified, Dashboard will attempt to auto discover the API server and connect
-          # to it. Uncomment only if the default does not work.
-          # - --apiserver-host=http://my-address:port
-        volumeMounts:
-        - name: kubernetes-dashboard-certs
-          mountPath: /certs
+https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/
 ```
+* Recap
+
+1- deploy
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
+```
+
+2- change the service type to `NodePort`
+
+you can use these commands to get service name
+
+```
+kubectl get svc -n kubernets-dashboard
+kubectl edit svc service-name -n kubernets-dashboard
+```
+
+3- Run the proxy
+
+```
+kubectl proxy
+```
+
+4- create service to access to the application
+
+instrucation are described in the link below
+```
+https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md
+```
+
 
 #install Helm
 
