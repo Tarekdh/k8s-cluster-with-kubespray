@@ -47,7 +47,7 @@
 * clone du dépôt (tag v2.15.1)
 
 ```
-git clone -b v2.12.10 https://github.com/kubernetes-sigs/kubespray.git
+git clone -b v2.15.1 https://github.com/kubernetes-sigs/kubespray.git
 
 cd /home/vagrant/kubespray
 ```
