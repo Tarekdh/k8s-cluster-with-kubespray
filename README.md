@@ -6,7 +6,9 @@
 
 * user by default for each node `vagrant` pwd `vagrant`
 
-* we are using ansible 2.9.20 and kubespray v2.12.10
+* we are using ansible 2.9.20 and kubespray v2.15.1 
+* we are using the box `ubuntu/bionic64`
+ 
 
 <br>
 
