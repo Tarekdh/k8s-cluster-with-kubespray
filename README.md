@@ -99,6 +99,7 @@ cp -rfp inventory/sample inventory/my-cluster
 ```
 [all] # déclaration des nodes
 node01 ansible_host=192.168.6.121  ip=192.168.6.121 etcd_member_name=etcd1
+node02 ansible_host=192.168.6.122  ip=192.168.6.122
 node05 ansible_host=192.168.6.125  ip=192.168.6.125
 [kube-master]
 node01
@@ -106,6 +107,7 @@ node01
 node01
 [kube-node]
 node05
+node02
 [calico-rr]
 [k8s-cluster:children]
 kube-master
